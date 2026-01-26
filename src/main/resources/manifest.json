@@ -1,0 +1,7 @@
+{
+	"Group": "TRS",
+	"Name": "Plugin",
+	"Version": "0.1.0",
+	"Main": "trs.plugin.MainPlugin",
+	"IncludesAssetPack": true
+}
