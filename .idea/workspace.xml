@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31aa396d-d7a6-4062-b183-7eed7a34764c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/Maturity/MaturityCollection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/Maturity/QueryCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/Maturity/SetCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/assets/MaturityAsset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/assets/MaturityAsset.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/MainPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/MainPlugin.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/TestCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/TestCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/TrsCommandCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/TrsCommandCollection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/TrsCommandCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/TrsCollection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/components/MaturityComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/components/MaturityComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/systems/MaturitySystems.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/systems/MaturitySystems.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/Server/NPC/Groups/TRS_Immature.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/Server/NPC/Groups/TRS_Immature.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,11 +89,15 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "actions.on.save"
+    "settings.editor.selected.configurable": "preferences.editor"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="trs.plugin.commands" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="trs.plugin.commands.Maturity" />
       <recent name="trs.plugin.commands" />
       <recent name="trs.utilities" />
     </key>

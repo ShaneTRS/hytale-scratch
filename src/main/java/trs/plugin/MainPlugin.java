@@ -8,7 +8,7 @@ import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import trs.plugin.assets.MaturityAsset;
-import trs.plugin.commands.TrsCommandCollection;
+import trs.plugin.commands.TrsCollection;
 import trs.plugin.components.MaturityComponent;
 import trs.plugin.systems.MaturitySystems;
 
@@ -32,7 +32,7 @@ public class MainPlugin extends JavaPlugin {
         instance = this;
         ComponentRegistryProxy<EntityStore> storeRegistry = this.getEntityStoreRegistry();
 
-        this.getCommandRegistry().registerCommand(new TrsCommandCollection());
+        this.getCommandRegistry().registerCommand(new TrsCollection());
         this.maturityComponentType = storeRegistry.registerComponent(MaturityComponent.class, "Maturity", MaturityComponent.CODEC);
         storeRegistry.registerSystem(new MaturitySystems.MaturityTicking());
         storeRegistry.registerSystem(new MaturitySystems.MaturityRef());

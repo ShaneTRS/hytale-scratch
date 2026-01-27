@@ -12,9 +12,10 @@ import com.hypixel.hytale.server.npc.entities.NPCEntity;
 import com.hypixel.hytale.server.npc.systems.RoleChangeSystem;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
+import trs.plugin.assets.MaturityAsset;
 import trs.plugin.components.MaturityComponent;
-
 import java.util.logging.Level;
+import static com.hypixel.hytale.math.vector.Vector3d.formatShortString;
 
 public class MaturitySystems {
     private static final ComponentType<EntityStore, MaturityComponent> maturityCompType = MaturityComponent.getComponentType();
@@ -25,18 +26,17 @@ public class MaturitySystems {
         @Override
         public void tick(float dt, int index, @NonNullDecl ArchetypeChunk<EntityStore> archetypeChunk, @NonNullDecl Store<EntityStore> store, @NonNullDecl CommandBuffer<EntityStore> commandBuffer) {
 
-            MaturityComponent maturityComponent = archetypeChunk.getComponent(index, maturityCompType);
-            if (maturityComponent.getCreatureDone()) return;
-            maturityComponent.incrementAge(dt);
+            MaturityComponent maturityComp = archetypeChunk.getComponent(index, maturityCompType);
+            maturityComp.incrementAge(dt);
 
-            if (!maturityComponent.completedChildhood()) return;
+            if (!maturityComp.completedChildhood()) return;
 
-            NPCEntity npcComponent = archetypeChunk.getComponent(index, npcCompType);
+            NPCEntity npcComp = archetypeChunk.getComponent(index, npcCompType);
+            Ref<EntityStore> ref = archetypeChunk.getReferenceTo(index);
 
-            maturityComponent.setCreatureDone(true);
-            RoleChangeSystem.requestRoleChange(archetypeChunk.getReferenceTo(index), npcComponent.getRole(), maturityComponent.getCreatureAdultRole(), true, store);
-
-            HytaleLogger.forEnclosingClass().at(Level.INFO).log(String.format("Maturity ticked for %s at %s", npcComponent.getRoleName(), npcComponent.getOldPosition()));
+            RoleChangeSystem.requestRoleChange(ref, npcComp.getRole(), maturityComp.getCreatureAdultRole(), true, store);
+            HytaleLogger.forEnclosingClass().at(Level.INFO).log(String.format("Requested role change for %s at position %s", npcComp.getRoleName(), formatShortString(npcComp.getOldPosition())));
+            commandBuffer.removeComponent(ref, maturityCompType);
         }
 
         @Override
@@ -49,15 +49,17 @@ public class MaturitySystems {
 
         @Override
         public void onEntityAdded(@NonNullDecl Ref<EntityStore> ref, @NonNullDecl AddReason addReason, @NonNullDecl Store<EntityStore> store, @NonNullDecl CommandBuffer<EntityStore> commandBuffer) {
-            NPCEntity npcEntity = store.getComponent(ref, npcCompType);
+            NPCEntity npcComp = store.getComponent(ref, npcCompType);
             int immatureGroup = NPCGroup.getAssetMap().getIndex("TRS_Immature");
-            int roleIndex = npcEntity.getRoleIndex();
 
             TagSetPlugin.TagSetLookup tagSetPlugin = TagSetPlugin.get(NPCGroup.class);
-            if (!tagSetPlugin.tagInSet(immatureGroup, roleIndex)) return;
+            if (!tagSetPlugin.tagInSet(immatureGroup, npcComp.getRoleIndex())) return;
+
+            MaturityAsset maturityAsset = MaturityAsset.getAssetMap().getAsset(npcComp.getRoleName());
+            if (maturityAsset == null) return;
 
             store.getExternalData().getWorld().execute(() -> {
-                store.addComponent(ref, MaturityComponent.getComponentType(), MaturityComponent.fromNPC(npcEntity));
+                store.addComponent(ref, maturityCompType, MaturityComponent.fromAsset(maturityAsset));
             });
         }
 

@@ -6,7 +6,6 @@ import com.hypixel.hytale.component.Component;
 import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.npc.NPCPlugin;
-import com.hypixel.hytale.server.npc.entities.NPCEntity;
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 import trs.plugin.MainPlugin;
 import trs.plugin.assets.MaturityAsset;
@@ -16,7 +15,6 @@ public class MaturityComponent implements Component<EntityStore> {
     private Float creatureAge = 0f;
     private Float creatureChildhood;
     private int creatureAdultRole;
-    private boolean creatureDone = false;
 
     public static final BuilderCodec<MaturityComponent> CODEC = BuilderCodec.builder(MaturityComponent.class, MaturityComponent::new)
             .append(
@@ -37,12 +35,6 @@ public class MaturityComponent implements Component<EntityStore> {
                     MaturityComponent::getCreatureAdultRole
             )
             .add()
-            .append(
-                    new KeyedCodec<>("Done", BuilderCodec.BOOLEAN),
-                    MaturityComponent::setCreatureDone,
-                    MaturityComponent::getCreatureDone
-            )
-            .add()
             .build();
 
     public static ComponentType<EntityStore, MaturityComponent> getComponentType() {
@@ -58,12 +50,10 @@ public class MaturityComponent implements Component<EntityStore> {
         this.creatureAdultRole = NPCPlugin.get().getIndex(roleName);
     }
     public void setCreatureAdultRoleId(int roleId) { this.creatureAdultRole = roleId; }
-    public void setCreatureDone(boolean done) { this.creatureDone = done; }
 
     public Float getCreatureAge() { return this.creatureAge; }
     public Float getCreatureChildhood() { return this.creatureChildhood; }
     public int getCreatureAdultRole() { return this.creatureAdultRole; }
-    public boolean getCreatureDone() { return this.creatureDone; }
 
     @NullableDecl
     @Override
@@ -72,19 +62,13 @@ public class MaturityComponent implements Component<EntityStore> {
         cloned.creatureAge = this.creatureAge;
         cloned.creatureChildhood = this.creatureChildhood;
         cloned.creatureAdultRole = this.creatureAdultRole;
-        cloned.creatureDone = this.creatureDone;
         return cloned;
     }
 
-    public static MaturityComponent fromNPC(NPCEntity npcEntity) {
+    public static MaturityComponent fromAsset(MaturityAsset maturityAsset) {
         MaturityComponent component = new MaturityComponent();
-        MaturityAsset maturityAsset = MaturityAsset.getAssetMap().getAsset(npcEntity.getRoleName());
-        if (maturityAsset != null) {
-            component.setCreatureAdultRole(maturityAsset.getAdultRole());
-            component.setCreatureChildhood(maturityAsset.getChildhood());
-        } else {
-            component.setCreatureAdultRoleId(npcEntity.getRoleIndex());
-        }
+        component.setCreatureAdultRole(maturityAsset.getAdultRole());
+        component.setCreatureChildhood(maturityAsset.getChildhood());
         return component;
     }
 }
