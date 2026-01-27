@@ -19,16 +19,18 @@ public class MaturityAsset implements JsonAssetWithMap<String, DefaultAssetMap<S
                     (maturityAsset, data) -> maturityAsset.extraData = data,
                     maturityAsset -> maturityAsset.extraData
             )
-            .addField(
+            .append(
                     new KeyedCodec<>("AdultRole", AssetBuilderCodec.STRING),
                     MaturityAsset::setAdultRole,
                     MaturityAsset::getAdultRole
             )
-            .addField(
+            .add()
+            .append(
                     new KeyedCodec<>("Childhood", AssetBuilderCodec.FLOAT),
                     MaturityAsset::setChildhood,
                     MaturityAsset::getChildhood
             )
+            .add()
             .build();
     private static AssetStore<String, MaturityAsset, DefaultAssetMap<String, MaturityAsset>> ASSET_STORE;
     protected AssetExtraInfo.Data extraData;

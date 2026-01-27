@@ -10,11 +10,14 @@ import com.hypixel.hytale.server.core.command.system.arguments.types.ArgTypes;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractTargetEntityCommand;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import com.hypixel.hytale.server.npc.NPCPlugin;
+import com.hypixel.hytale.server.npc.entities.NPCEntity;
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 import trs.plugin.components.MaturityComponent;
 
 import javax.annotation.Nonnull;
+import javax.swing.text.html.parser.Entity;
 
 public class TestCommand extends AbstractTargetEntityCommand {
 
@@ -36,39 +39,39 @@ public class TestCommand extends AbstractTargetEntityCommand {
         switch (this.targetArg.get(commandContext)) {
             case 0: {
                 ComponentType<EntityStore, MaturityComponent> maturityComponent = MaturityComponent.getComponentType();
+                ComponentType<EntityStore, NPCEntity> npcComponent = NPCEntity.getComponentType();
                 for (Ref<EntityStore> ref : objectList) {
-                    MaturityComponent comp = store.getComponent(ref, maturityComponent);
-                    if (comp != null) {
-                        commandContext.sendMessage(Message.raw(String.format(
-                                "Will grow up into %s after %s. Lived for %s",
-                                comp.getCreatureAdultRole(),
-                                comp.getCreatureChildhood(),
-                                comp.getCreatureAge()
-                        )));
-                    } else {
-                        commandContext.sendMessage(Message.raw("Will not mature"));
-                    }
+                    MaturityComponent compMat = store.getComponent(ref, maturityComponent);
+                    NPCEntity compNpc = store.getComponent(ref, npcComponent);
+                    if (compMat == null) break;
+                    commandContext.sendMessage(maturityDebugMessage(compMat, compNpc));
                 }
                 break;
             }
             case 1: {
                 ComponentType<EntityStore, MaturityComponent> maturityComponent = MaturityComponent.getComponentType();
+                ComponentType<EntityStore, NPCEntity> npcComponent = NPCEntity.getComponentType();
                 for (Ref<EntityStore> ref : objectList) {
-                    MaturityComponent comp = store.getComponent(ref, maturityComponent);
-                    if (comp != null) {
-                        comp.setCreatureChildhood(10f);
-                        commandContext.sendMessage(Message.raw(String.format(
-                                "Will grow up into %s after %s. Lived for %s",
-                                comp.getCreatureAdultRole(),
-                                comp.getCreatureChildhood(),
-                                comp.getCreatureAge()
-                        )));
-                    } else {
-                        commandContext.sendMessage(Message.raw("Will not mature"));
-                    }
+                    MaturityComponent compMat = store.getComponent(ref, maturityComponent);
+                    NPCEntity compNpc = store.getComponent(ref, npcComponent);
+                    if (compMat == null) break;
+                    compMat.setCreatureChildhood(10f);
+                    commandContext.sendMessage(maturityDebugMessage(compMat, compNpc));
                 }
+                break;
             }
         }
+    }
+
+    private Message maturityDebugMessage(MaturityComponent maturity, NPCEntity npc) {
+        String adultRole = NPCPlugin.get().getName(maturity.getCreatureAdultRole());
+        return Message.raw(String.format(
+                "%s will grow up into %s after %s. Lived for %s",
+                npc.getRoleName(),
+                adultRole,
+                maturity.getCreatureChildhood(),
+                maturity.getCreatureAge()
+        ));
     }
 
 }
