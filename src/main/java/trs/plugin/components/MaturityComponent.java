@@ -13,7 +13,7 @@ import trs.plugin.assets.MaturityAsset;
 public class MaturityComponent implements Component<EntityStore> {
 
     private Float creatureAge = 0f;
-    private Float creatureChildhood;
+    private Float creatureChildhood = 0f;
     private int creatureAdultRole;
 
     public static final BuilderCodec<MaturityComponent> CODEC = BuilderCodec.builder(MaturityComponent.class, MaturityComponent::new)
