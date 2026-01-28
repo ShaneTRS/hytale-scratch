@@ -2,8 +2,8 @@ plugins {
     id("java")
 }
 
-group = "trs.plugin.utilities"
-version = "0.1.0"
+group = "trs.plugin"
+version = "0.2.0"
 
 repositories {
     mavenCentral()
