@@ -38,17 +38,15 @@ public class MaturityCommand extends AbstractTargetEntityCommand {
 		@NonNullDecl Store<EntityStore> store
 	) {
 		for (Ref<EntityStore> ref : objectList) {
-			MaturityComponent maturityComp = store.getComponent(ref, MaturityComponent.getComponentType());
 			NPCEntity npcComp = store.getComponent(ref, NPCEntity.getComponentType());
-			
 			if (npcComp == null) continue;
 			
+			MaturityComponent maturityComp = store.getComponent(ref, MaturityComponent.getComponentType());
 			if (commandContext.get(create) && maturityComp == null) {
 				maturityComp = new MaturityComponent();
 				maturityComp.setCreatureAdultRoleId(npcComp.getRoleIndex());
 				store.addComponent(ref, MaturityComponent.getComponentType(), maturityComp);
 			}
-			
 			if (maturityComp == null) continue;
 			
 			if (commandContext.get(seconds) != null) {
