@@ -25,8 +25,11 @@ public class MainPlugin extends JavaPlugin {
 	private ComponentType<EntityStore, MaturityComponent> MATURITY_COMPONENT;
 	private ComponentType<EntityStore, TpRequestComponent> TP_REQUEST_COMPONENT;
 	
-	
 	public MainPlugin(@Nonnull JavaPluginInit init) { super(init); }
+
+	public static MainPlugin get() { return instance; }	
+	public ComponentType<EntityStore, MaturityComponent> getMaturityComponentType() { return this.MATURITY_COMPONENT; }
+	public ComponentType<EntityStore, TpRequestComponent> getTpRequestComponentType() { return this.TP_REQUEST_COMPONENT; }
 	
 	@Override
 	protected void setup() {
@@ -35,15 +38,15 @@ public class MainPlugin extends JavaPlugin {
 		ComponentRegistryProxy<EntityStore> entityStoreRegistry = this.getEntityStoreRegistry();
 		AssetRegistry assetRegistry = this.getAssetRegistry();
 		
+		this.MATURITY_COMPONENT = entityStoreRegistry.registerComponent(MaturityComponent.class, "Maturity", MaturityComponent.CODEC);
+		this.TP_REQUEST_COMPONENT = entityStoreRegistry.registerComponent(TpRequestComponent.class, "TpRequest", TpRequestComponent.CODEC);
+		
 		commandRegistry.registerCommand(new TrsCollection());
 		commandRegistry.registerCommand(new TpRequestCommand("tpa", "Request to teleport to a player", false));
 		commandRegistry.registerCommand(new TpAcceptAllCommand(
 			"tpaccept", "Accept incoming teleportation request", false,
 			"Accept a specific teleportation request"
 		));
-		
-		this.MATURITY_COMPONENT = entityStoreRegistry.registerComponent(MaturityComponent.class, "Maturity", MaturityComponent.CODEC);
-		this.TP_REQUEST_COMPONENT = entityStoreRegistry.registerComponent(TpRequestComponent.class, "TpRequest", TpRequestComponent.CODEC);
 		
 		entityStoreRegistry.registerSystem(new MaturitySystems.MaturityTicking());
 		entityStoreRegistry.registerSystem(new MaturitySystems.MaturityRef());
@@ -58,9 +61,4 @@ public class MainPlugin extends JavaPlugin {
 			.build()
 		);
 	}
-	
-	public static MainPlugin get() { return instance; }
-	
-	public ComponentType<EntityStore, MaturityComponent> getMaturityComponentType() { return this.MATURITY_COMPONENT; }
-	public ComponentType<EntityStore, TpRequestComponent> getTpRequestComponentType() { return this.TP_REQUEST_COMPONENT; }
 }

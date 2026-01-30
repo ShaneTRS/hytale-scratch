@@ -37,7 +37,9 @@ public class MaturitySystems {
 			Ref<EntityStore> ref = archetypeChunk.getReferenceTo(index);
 			
 			RoleChangeSystem.requestRoleChange(ref, npcComp.getRole(), maturityComp.getAdultRole(), true, store);
-			HytaleLogger.forEnclosingClass().atInfo().log(String.format("Requested role change for %s at position %s", npcComp.getRoleName(), formatShortString(npcComp.getOldPosition())));
+			HytaleLogger.forEnclosingClass().atInfo().log(String.format(
+				"Requested role change for %s at position %s", npcComp.getRoleName(), formatShortString(npcComp.getOldPosition())
+			));
 			commandBuffer.removeComponent(ref, MATURITY_COMPONENT);
 		}
 		

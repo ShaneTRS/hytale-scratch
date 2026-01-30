@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="31aa396d-d7a6-4062-b183-7eed7a34764c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trs/scratch/MainPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/scratch/MainPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trs/scratch/commands/TpRequestCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/scratch/commands/TpRequestCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trs/scratch/systems/MaturitySystems.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/scratch/systems/MaturitySystems.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +88,7 @@
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/shane/Documents/Mods/hytale/TRS",
     "project.structure.last.edited": "SDKs",

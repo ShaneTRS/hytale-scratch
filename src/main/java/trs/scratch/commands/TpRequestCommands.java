@@ -22,6 +22,8 @@ public class TpRequestCommands {
 	private static final ComponentType<EntityStore, TpRequestComponent> TP_REQUEST_COMPONENT = TpRequestComponent.getComponentType();
 	private static final ComponentType<EntityStore, PlayerRef> PLAYER_REF_COMPONENT = PlayerRef.getComponentType();
 	
+	private static String ACCEPT_COMMAND = "tpaccept";
+	
 	public static class TpRequestCommand extends AbstractPlayerCommand {
 		private final RequiredArg<UUID> target;
 		
@@ -53,7 +55,7 @@ public class TpRequestCommands {
 				.insert(String.format("! They have %.0f seconds to accept..", tpRequestComp.getLifetime()))
 				.color(Color.LIGHT_GRAY);
 			Message targetNotify = Message.raw(playerUsername + " wants to teleport to you! You may use ")
-				.insert(Message.raw("/tpaccept " + playerUsername).color(Color.WHITE))
+				.insert(Message.raw("/" + ACCEPT_COMMAND + " " + playerUsername).color(Color.WHITE))
 				.insert(" to accept their request.")
 				.color(Color.LIGHT_GRAY);
 			
@@ -62,7 +64,7 @@ public class TpRequestCommands {
 			EventTitleUtil.showEventTitleToPlayer(
 				targetRef,
 				Message.raw(playerUsername + " wants to teleport to you!"),
-				Message.raw("Teleport Requests  -  /tpaccept"),
+				Message.raw("Teleport Requests  -  /" + ACCEPT_COMMAND),
 				false, null,
 				8.0f, 0.5f, 0.5f
 			);
@@ -72,12 +74,14 @@ public class TpRequestCommands {
 	public static class TpAcceptAllCommand extends AbstractPlayerCommand {
 		public TpAcceptAllCommand(@Nonnull String name, @Nonnull String description, boolean requiresConfirmation) {
 			super(name, description, requiresConfirmation);
+			ACCEPT_COMMAND = name;
 		}
 		public TpAcceptAllCommand(@Nonnull String description) { super(description); }
 		
 		public TpAcceptAllCommand(@Nonnull String name, @Nonnull String description, boolean requiresConfirmation, @Nonnull String variantDescription) {
 			super(name, description, requiresConfirmation);
 			this.addUsageVariant(new TpAcceptSpecificCommand(variantDescription));
+			ACCEPT_COMMAND = name;
 		}
 		
 		@Override
@@ -100,6 +104,7 @@ public class TpRequestCommands {
 		public TpAcceptSpecificCommand(@Nonnull String name, @Nonnull String description, boolean requiresConfirmation) {
 			super(name, description, requiresConfirmation);
 			this.target = withRequiredArg("target", "Player you wish to accept", ArgTypes.PLAYER_UUID);
+			ACCEPT_COMMAND = name;
 		}
 		public TpAcceptSpecificCommand(@Nonnull String description) {
 			super(description);
