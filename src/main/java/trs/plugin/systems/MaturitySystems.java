@@ -13,13 +13,11 @@ import org.checkerframework.checker.nullness.compatqual.NullableDecl;
 import trs.plugin.assets.MaturityAsset;
 import trs.plugin.components.MaturityComponent;
 
-import java.util.logging.Level;
-
 import static com.hypixel.hytale.math.vector.Vector3d.formatShortString;
 
 public class MaturitySystems {
-	private static final ComponentType<EntityStore, MaturityComponent> maturityCompType = MaturityComponent.getComponentType();
-	private static final ComponentType<EntityStore, NPCEntity> npcCompType = NPCEntity.getComponentType();
+	private static final ComponentType<EntityStore, MaturityComponent> MATURITY_COMPONENT = MaturityComponent.getComponentType();
+	private static final ComponentType<EntityStore, NPCEntity> NPC_COMPONENT = NPCEntity.getComponentType();
 	
 	public static class MaturityTicking extends EntityTickingSystem<EntityStore> {
 		@Override
@@ -30,22 +28,22 @@ public class MaturitySystems {
 			@NonNullDecl Store<EntityStore> store,
 			@NonNullDecl CommandBuffer<EntityStore> commandBuffer
 		) {
-			MaturityComponent maturityComp = archetypeChunk.getComponent(index, maturityCompType);
+			MaturityComponent maturityComp = archetypeChunk.getComponent(index, MATURITY_COMPONENT);
 			maturityComp.incrementAge(dt);
 			
 			if (!maturityComp.completedChildhood()) return;
 			
-			NPCEntity npcComp = archetypeChunk.getComponent(index, npcCompType);
+			NPCEntity npcComp = archetypeChunk.getComponent(index, NPC_COMPONENT);
 			Ref<EntityStore> ref = archetypeChunk.getReferenceTo(index);
 			
 			RoleChangeSystem.requestRoleChange(ref, npcComp.getRole(), maturityComp.getCreatureAdultRole(), true, store);
-			HytaleLogger.forEnclosingClass().at(Level.INFO).log(String.format("Requested role change for %s at position %s", npcComp.getRoleName(), formatShortString(npcComp.getOldPosition())));
-			commandBuffer.removeComponent(ref, maturityCompType);
+			HytaleLogger.forEnclosingClass().atInfo().log(String.format("Requested role change for %s at position %s", npcComp.getRoleName(), formatShortString(npcComp.getOldPosition())));
+			commandBuffer.removeComponent(ref, MATURITY_COMPONENT);
 		}
 		
 		@Override
 		public Query<EntityStore> getQuery() {
-			return Query.and(maturityCompType, npcCompType);
+			return Query.and(MATURITY_COMPONENT, NPC_COMPONENT);
 		}
 	}
 	
@@ -57,11 +55,11 @@ public class MaturitySystems {
 			@NonNullDecl Store<EntityStore> store,
 			@NonNullDecl CommandBuffer<EntityStore> commandBuffer
 		) {
-			NPCEntity npcComp = store.getComponent(ref, npcCompType);
+			NPCEntity npcComp = store.getComponent(ref, NPC_COMPONENT);
 			MaturityAsset maturityAsset = MaturityAsset.getAssetMap().getAsset(npcComp.getRoleName());
 			if (maturityAsset == null) return;
 			
-			commandBuffer.addComponent(ref, maturityCompType, MaturityComponent.fromAsset(maturityAsset));
+			commandBuffer.addComponent(ref, MATURITY_COMPONENT, MaturityComponent.fromAsset(maturityAsset));
 		}
 		
 		@Override
@@ -75,7 +73,7 @@ public class MaturitySystems {
 		@NullableDecl
 		@Override
 		public Query<EntityStore> getQuery() {
-			return Query.and(npcCompType, Query.not(maturityCompType));
+			return Query.and(NPC_COMPONENT, Query.not(MATURITY_COMPONENT));
 		}
 	}
 }
