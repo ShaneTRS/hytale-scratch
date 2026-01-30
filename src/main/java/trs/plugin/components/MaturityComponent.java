@@ -11,28 +11,28 @@ import trs.plugin.MainPlugin;
 import trs.plugin.assets.MaturityAsset;
 
 public class MaturityComponent implements Component<EntityStore> {
-	private Float creatureAge = 0f;
-	private Float creatureChildhood = 0f;
-	private int creatureAdultRole;
+	private Float age = 0f;
+	private Float childhood = 0f;
+	private int adultRole;
 	
 	public static final BuilderCodec<MaturityComponent> CODEC = BuilderCodec
 		.builder(MaturityComponent.class, MaturityComponent::new)
 		.append(
 			new KeyedCodec<>("Age", BuilderCodec.FLOAT),
-			MaturityComponent::setCreatureAge,
-			MaturityComponent::getCreatureAge
+			MaturityComponent::setAge,
+			MaturityComponent::getAge
 		)
 		.add()
 		.append(
 			new KeyedCodec<>("Childhood", BuilderCodec.FLOAT),
-			MaturityComponent::setCreatureChildhood,
-			MaturityComponent::getCreatureChildhood
+			MaturityComponent::setChildhood,
+			MaturityComponent::getChildhood
 		)
 		.add()
 		.append(
 			new KeyedCodec<>("AdultRole", BuilderCodec.INTEGER),
 			MaturityComponent::setCreatureAdultRoleId,
-			MaturityComponent::getCreatureAdultRole
+			MaturityComponent::getAdultRole
 		)
 		.add()
 		.build();
@@ -41,25 +41,25 @@ public class MaturityComponent implements Component<EntityStore> {
 		return MainPlugin.get().getMaturityComponentType();
 	}
 	
-	public Float getCreatureAge() { return this.creatureAge; }
-	public void setCreatureAge(Float seconds) { this.creatureAge = seconds; }
+	public Float getAge() { return this.age; }
+	public void setAge(Float seconds) { this.age = seconds; }
 	
-	public Float getCreatureChildhood() { return this.creatureChildhood; }
-	public void setCreatureChildhood(Float seconds) { this.creatureChildhood = seconds; }
+	public Float getChildhood() { return this.childhood; }
+	public void setChildhood(Float seconds) { this.childhood = seconds; }
 	
-	public int getCreatureAdultRole() { return this.creatureAdultRole; }
-	public void setCreatureAdultRole(String roleName) {
-		this.creatureAdultRole = NPCPlugin.get().getIndex(roleName);
+	public int getAdultRole() { return this.adultRole; }
+	public void setAdultRole(String roleName) {
+		this.adultRole = NPCPlugin.get().getIndex(roleName);
 	}
-	public void setCreatureAdultRoleId(int roleId) { this.creatureAdultRole = roleId; }
+	public void setCreatureAdultRoleId(int roleId) { this.adultRole = roleId; }
 	
-	public void incrementAge(Float seconds) { this.creatureAge += seconds; }
-	public boolean completedChildhood() { return this.creatureAge > this.creatureChildhood; }
+	public void incrementAge(Float seconds) { this.age += seconds; }
+	public boolean completedChildhood() { return this.age > this.childhood; }
 	
 	public static MaturityComponent fromAsset(MaturityAsset maturityAsset) {
 		MaturityComponent component = new MaturityComponent();
-		component.setCreatureAdultRole(maturityAsset.getAdultRole());
-		component.setCreatureChildhood(maturityAsset.getChildhood());
+		component.setAdultRole(maturityAsset.getAdultRole());
+		component.setChildhood(maturityAsset.getChildhood());
 		return component;
 	}
 	
@@ -67,9 +67,9 @@ public class MaturityComponent implements Component<EntityStore> {
 	@Override
 	public Component<EntityStore> clone() {
 		MaturityComponent cloned = new MaturityComponent();
-		cloned.creatureAge = this.creatureAge;
-		cloned.creatureChildhood = this.creatureChildhood;
-		cloned.creatureAdultRole = this.creatureAdultRole;
+		cloned.age = this.age;
+		cloned.childhood = this.childhood;
+		cloned.adultRole = this.adultRole;
 		return cloned;
 	}
 }

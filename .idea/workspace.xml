@@ -5,14 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31aa396d-d7a6-4062-b183-7eed7a34764c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/TpRequestCommands.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/components/TpRequestComponent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/systems/TpRequestSystems.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/systems/TpRequestSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/MainPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/MainPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/MaturityCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/MaturityCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/PingCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/PingCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/TestCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/TestCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/TpRequestCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/TpRequestCommands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/components/MaturityComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/components/MaturityComponent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/components/TpRequestComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/components/TpRequestComponent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/systems/MaturitySystems.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/systems/MaturitySystems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/systems/TpRequestSystems.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +51,12 @@
                 <item name="Tasks" type="e4a08cd1:TasksNode" />
                 <item name="build" type="c8890929:TasksNode$1" />
               </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="TRS" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="other" type="c8890929:TasksNode$1" />
+              </path>
             </expand>
             <select />
           </tree_state>
@@ -80,6 +89,7 @@
     "Gradle.Build TRS.executor": "Run",
     "Gradle.TRS [build].executor": "Run",
     "Gradle.TRS [clean].executor": "Run",
+    "Gradle.TRS [compileJava].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
@@ -100,8 +110,8 @@
       <recent name="trs.plugin.commands" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="trs.plugin.commands" />
       <recent name="trs.plugin.components" />
+      <recent name="trs.plugin.commands" />
       <recent name="trs.plugin.systems" />
       <recent name="trs.plugin.commands.Maturity" />
       <recent name="trs.utilities" />
@@ -113,7 +123,7 @@
         <option name="executionName" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
+        <option name="scriptParameters" value="" />
         <option name="taskDescriptions">
           <list />
         </option>
@@ -122,7 +132,7 @@
             <option value="build" />
           </list>
         </option>
-        <option name="vmOptions" />
+        <option name="vmOptions" value="" />
       </ExternalSystemSettings>
       <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
       <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
@@ -145,6 +155,31 @@
         <option name="taskNames">
           <list>
             <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <ExternalSystemDebugDisabled>false</ExternalSystemDebugDisabled>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <GradleProfilingDisabled>false</GradleProfilingDisabled>
+      <GradleCoverageDisabled>false</GradleCoverageDisabled>
+      <method v="2" />
+    </configuration>
+    <configuration name="TRS [compileJava]" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="compileJava" />
           </list>
         </option>
         <option name="vmOptions" />

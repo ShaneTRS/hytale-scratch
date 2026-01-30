@@ -11,35 +11,42 @@ import trs.plugin.MainPlugin;
 import java.util.UUID;
 
 public class TpRequestComponent implements Component<EntityStore> {
-	private Float tpLifetime = 60f;
-	private Float tpDelay = 10f;
-	private UUID tpTarget;
-	private boolean tpAccepted = false;
+	private Float lifetime = 60f;
+	private Float delay = 10f;
+	private UUID target;
+	private boolean accepted = false;
+	private boolean notified = false;
 	
 	public static final BuilderCodec<TpRequestComponent> CODEC = BuilderCodec
 		.builder(TpRequestComponent.class, TpRequestComponent::new)
 		.append(
 			new KeyedCodec<>("Lifetime", BuilderCodec.FLOAT),
-			TpRequestComponent::setTpLifetime,
-			TpRequestComponent::getTpLifetime
+			TpRequestComponent::setLifetime,
+			TpRequestComponent::getLifetime
 		)
 		.add()
 		.append(
 			new KeyedCodec<>("Delay", BuilderCodec.FLOAT),
-			TpRequestComponent::setTpDelay,
-			TpRequestComponent::getTpDelay
+			TpRequestComponent::setDelay,
+			TpRequestComponent::getDelay
 		)
 		.add()
 		.append(
 			new KeyedCodec<>("Target", BuilderCodec.UUID_STRING),
-			TpRequestComponent::setTpTarget,
-			TpRequestComponent::getTpTarget
+			TpRequestComponent::setTarget,
+			TpRequestComponent::getTarget
 		)
 		.add()
 		.append(
 			new KeyedCodec<>("Accepted", BuilderCodec.BOOLEAN),
-			TpRequestComponent::setTpAccepted,
-			TpRequestComponent::getTpAccepted
+			TpRequestComponent::setAccepted,
+			TpRequestComponent::getAccepted
+		)
+		.add()
+		.append(
+			new KeyedCodec<>("Notified", BuilderCodec.BOOLEAN),
+			TpRequestComponent::setNotified,
+			TpRequestComponent::getNotified
 		)
 		.add()
 		.build();
@@ -48,29 +55,30 @@ public class TpRequestComponent implements Component<EntityStore> {
 		return MainPlugin.get().getTpRequestComponentType();
 	}
 	
-	public void setTpLifetime(float duration) { this.tpLifetime = duration; }
-	public Float getTpLifetime() { return this.tpLifetime; }
+	public void setLifetime(float duration) { this.lifetime = duration; }
+	public Float getLifetime() { return this.lifetime; }
+	public void setDelay(float duration) { this.delay = duration; }
+	public Float getDelay() { return this.delay; }
 	
-	public void setTpDelay(float duration) { this.tpDelay = duration; }
-	public Float getTpDelay() { return this.tpDelay; }
+	public void setTarget(UUID target) { this.target = target; }
+	public UUID getTarget() { return this.target; }
 	
-	public void setTpTarget(UUID target) { this.tpTarget = target; }
-	public UUID getTpTarget() { return this.tpTarget; }
+	public void setAccepted(boolean state) { this.accepted = state; }
+	public boolean getAccepted() { return this.accepted; }
+	public void setNotified(boolean state) { this.notified = state; }
+	public boolean getNotified() { return this.notified; }
 	
-	public void setTpAccepted(boolean state) { this.tpAccepted = state; }
-	public boolean getTpAccepted() { return this.tpAccepted; }
-	
-	public void decrementLifetime(float seconds) { this.tpLifetime -= seconds; }
-	public void decrementTpDelay(float seconds) { this.tpDelay -= seconds; }
+	public void decrementLifetime(float seconds) { this.lifetime -= seconds; }
+	public void decrementDelay(float seconds) { this.delay -= seconds; }
 	
 	@NullableDecl
 	@Override
 	public Component<EntityStore> clone() {
 		TpRequestComponent cloned = new TpRequestComponent();
-		cloned.tpLifetime = this.tpLifetime;
-		cloned.tpDelay = this.tpDelay;
-		cloned.tpTarget = this.tpTarget;
-		cloned.tpAccepted = this.tpAccepted;
+		cloned.lifetime = this.lifetime;
+		cloned.delay = this.delay;
+		cloned.target = this.target;
+		cloned.accepted = this.accepted;
 		return cloned;
 	}
 }

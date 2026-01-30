@@ -32,7 +32,13 @@ public class PingCommand extends AbstractPlayerCommand {
 		));
 		
 		EventTitleUtil.hideEventTitleFromPlayer(playerRef, 0.5f);
-		EventTitleUtil.showEventTitleToPlayer(playerRef, pingMessage, Message.raw(playerRef.getUsername() + " - " + world.getName()), true, null, 4.0f, 0.5f, 0.5f);
+		EventTitleUtil.showEventTitleToPlayer(
+			playerRef,
+			pingMessage,
+			Message.raw(playerRef.getUsername() + " - " + world.getName()),
+			true, null,
+			4.0f, 0.5f, 0.5f
+		);
 		commandContext.sendMessage(pingMessage);
 	}
 }

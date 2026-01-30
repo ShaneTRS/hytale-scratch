@@ -11,6 +11,7 @@ import com.hypixel.hytale.server.core.command.system.basecommands.AbstractPlayer
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
+import com.hypixel.hytale.server.core.util.EventTitleUtil;
 import trs.plugin.components.TpRequestComponent;
 
 import javax.annotation.Nonnull;
@@ -37,23 +38,34 @@ public class TpRequestCommands {
 			@Nonnull PlayerRef playerRef,
 			@Nonnull World world
 		) {
-			TpRequestComponent tpRequestComp = new TpRequestComponent();
+			store.removeComponentIfExists(ref, TP_REQUEST_COMPONENT);
+			
 			UUID targetUUID = commandContext.get(target);
 			PlayerRef targetRef = store.getComponent(world.getEntityRef(targetUUID), PLAYER_REF_COMPONENT);
-			tpRequestComp.setTpTarget(targetUUID);
 			
+			TpRequestComponent tpRequestComp = new TpRequestComponent();
+			tpRequestComp.setTarget(targetUUID);
 			store.addComponent(ref, TP_REQUEST_COMPONENT, tpRequestComp);
+			
 			String playerUsername = playerRef.getUsername();
 			Message playerReassure = Message.raw("You sent a teleport request to ")
 				.insert(Message.raw(targetRef.getUsername()).color(Color.WHITE))
-				.insert(String.format("! They have %.0f seconds to accept..", tpRequestComp.getTpLifetime()))
+				.insert(String.format("! They have %.0f seconds to accept..", tpRequestComp.getLifetime()))
 				.color(Color.LIGHT_GRAY);
-			playerRef.sendMessage(playerReassure);
 			Message targetNotify = Message.raw(playerUsername + " wants to teleport to you! You may use ")
 				.insert(Message.raw("/tpaccept " + playerUsername).color(Color.WHITE))
 				.insert(" to accept their request.")
 				.color(Color.LIGHT_GRAY);
+			
+			playerRef.sendMessage(playerReassure);
 			targetRef.sendMessage(targetNotify);
+			EventTitleUtil.showEventTitleToPlayer(
+				targetRef,
+				Message.raw(playerUsername + " wants to teleport to you!"),
+				Message.raw("Teleport Requests  -  /tpaccept"),
+				false, null,
+				8.0f, 0.5f, 0.5f
+			);
 		}
 	}
 	
@@ -63,7 +75,6 @@ public class TpRequestCommands {
 		}
 		public TpAcceptAllCommand(@Nonnull String description) { super(description); }
 		
-		/** Constructor with specific variant */
 		public TpAcceptAllCommand(@Nonnull String name, @Nonnull String description, boolean requiresConfirmation, @Nonnull String variantDescription) {
 			super(name, description, requiresConfirmation);
 			this.addUsageVariant(new TpAcceptSpecificCommand(variantDescription));
@@ -120,13 +131,23 @@ public class TpRequestCommands {
 		PlayerRef playerRef
 	) {
 		TpRequestComponent tpRequestComp = store.getComponent(targetRef, TP_REQUEST_COMPONENT);
-		if (tpRequestComp == null || tpRequestComp.getTpTarget() != playerRef.getUuid()) return;
-		tpRequestComp.setTpAccepted(true);
+		if (tpRequestComp == null || tpRequestComp.getTarget() != playerRef.getUuid()) return;
+		tpRequestComp.setAccepted(true);
+		
+		String targetUsername = targetPlayerRef.getUsername();
 		Message targetNotify = Message.raw(playerRef.getUsername()).color(Color.WHITE)
 			.insert(Message.raw(" accepted your teleport request! Make sure to stop moving if you want to teleport!").color(Color.LIGHT_GRAY));
 		Message playerNotify = Message.raw("You accepted ")
-			.insert(Message.raw(targetPlayerRef.getUsername()).color(Color.WHITE)).insert("'s teleport request! They'll be teleported momentarily..").color(Color.LIGHT_GRAY);
+			.insert(Message.raw(targetUsername).color(Color.WHITE)).insert("'s teleport request! They'll be teleported momentarily..").color(Color.LIGHT_GRAY);
+		
 		playerRef.sendMessage(playerNotify);
 		targetPlayerRef.sendMessage(targetNotify);
+		EventTitleUtil.showEventTitleToPlayer(
+			playerRef,
+			Message.raw(targetUsername + " accepted your teleport request!"),
+			Message.raw("Teleport Requests  -  Stop Moving"),
+			false, null,
+			8.0f, 0.5f, 0.5f
+		);
 	}
 }

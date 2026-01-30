@@ -50,19 +50,19 @@ public class MaturityCommand extends AbstractTargetEntityCommand {
 			if (maturityComp == null) continue;
 			
 			if (commandContext.get(seconds) != null) {
-				maturityComp.setCreatureChildhood(commandContext.get(seconds));
-				maturityComp.setCreatureAge(0f);
+				maturityComp.setChildhood(commandContext.get(seconds));
+				maturityComp.setAge(0f);
 			}
 			if (commandContext.get(role) != null) {
-				maturityComp.setCreatureAdultRole(commandContext.get(role));
+				maturityComp.setAdultRole(commandContext.get(role));
 			}
 			
 			commandContext.sendMessage(Message.raw(String.format(
 				"%s will grow up into %s. %.3f/%.3f",
 				npcComp.getRoleName(),
-				NPCPlugin.get().getName(maturityComp.getCreatureAdultRole()),
-				maturityComp.getCreatureAge(),
-				maturityComp.getCreatureChildhood()
+				NPCPlugin.get().getName(maturityComp.getAdultRole()),
+				maturityComp.getAge(),
+				maturityComp.getChildhood()
 			)));
 		}
 	}

@@ -16,7 +16,7 @@ import trs.plugin.commands.TrsCollection;
 import trs.plugin.components.MaturityComponent;
 import trs.plugin.components.TpRequestComponent;
 import trs.plugin.systems.MaturitySystems;
-import trs.plugin.systems.TpRequestSystems;
+import trs.plugin.systems.TpRequestSystem;
 
 import javax.annotation.Nonnull;
 
@@ -24,6 +24,7 @@ public class MainPlugin extends JavaPlugin {
 	protected static MainPlugin instance;
 	private ComponentType<EntityStore, MaturityComponent> MATURITY_COMPONENT;
 	private ComponentType<EntityStore, TpRequestComponent> TP_REQUEST_COMPONENT;
+	
 	
 	public MainPlugin(@Nonnull JavaPluginInit init) { super(init); }
 	
@@ -46,7 +47,7 @@ public class MainPlugin extends JavaPlugin {
 		
 		entityStoreRegistry.registerSystem(new MaturitySystems.MaturityTicking());
 		entityStoreRegistry.registerSystem(new MaturitySystems.MaturityRef());
-		entityStoreRegistry.registerSystem(new TpRequestSystems.TpRequestTicking());
+		entityStoreRegistry.registerSystem(new TpRequestSystem());
 		
 		HytaleAssetStore.Builder<String, MaturityAsset, DefaultAssetMap<String, MaturityAsset>> maturityAssetBuilder =
 			HytaleAssetStore.builder(MaturityAsset.class, new DefaultAssetMap<>());
