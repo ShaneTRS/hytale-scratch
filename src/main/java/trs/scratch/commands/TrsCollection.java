@@ -1,4 +1,4 @@
-package trs.plugin.commands;
+package trs.scratch.commands;
 
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractCommandCollection;
 

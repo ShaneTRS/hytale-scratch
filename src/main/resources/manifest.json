@@ -1,8 +1,8 @@
 {
 	"Group": "TRS",
-	"Name": "Plugin",
-	"Version": "0.2.0",
-	"Description": "TRS.Plugin",
+	"Name": "Scratch",
+	"Version": "0.3.0",
+	"Description": "TRS.Scratch",
 	"ServerVersion": "*",
 	"Dependencies": {},
 	"OptionalDependencies": {},
@@ -14,6 +14,6 @@
 			"Url": "https://github.com/ShaneTRS"
 		}
 	],
-	"Main": "trs.plugin.MainPlugin",
+	"Main": "trs.scratch.MainPlugin",
 	"IncludesAssetPack": true
 }

@@ -1,4 +1,4 @@
-package trs.plugin.commands;
+package trs.scratch.commands;
 
 import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.component.Ref;
@@ -12,7 +12,7 @@ import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.core.util.EventTitleUtil;
-import trs.plugin.components.TpRequestComponent;
+import trs.scratch.components.TpRequestComponent;
 
 import javax.annotation.Nonnull;
 import java.awt.*;

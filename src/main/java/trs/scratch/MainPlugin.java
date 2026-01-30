@@ -1,4 +1,4 @@
-package trs.plugin;
+package trs.scratch;
 
 import com.hypixel.hytale.assetstore.map.DefaultAssetMap;
 import com.hypixel.hytale.component.ComponentRegistryProxy;
@@ -9,14 +9,14 @@ import com.hypixel.hytale.server.core.plugin.JavaPlugin;
 import com.hypixel.hytale.server.core.plugin.JavaPluginInit;
 import com.hypixel.hytale.server.core.plugin.registry.AssetRegistry;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import trs.plugin.assets.MaturityAsset;
-import trs.plugin.commands.TpRequestCommands.TpRequestCommand;
-import trs.plugin.commands.TpRequestCommands.TpAcceptAllCommand;
-import trs.plugin.commands.TrsCollection;
-import trs.plugin.components.MaturityComponent;
-import trs.plugin.components.TpRequestComponent;
-import trs.plugin.systems.MaturitySystems;
-import trs.plugin.systems.TpRequestSystems;
+import trs.scratch.assets.MaturityAsset;
+import trs.scratch.commands.TpRequestCommands.TpRequestCommand;
+import trs.scratch.commands.TpRequestCommands.TpAcceptAllCommand;
+import trs.scratch.commands.TrsCollection;
+import trs.scratch.components.MaturityComponent;
+import trs.scratch.components.TpRequestComponent;
+import trs.scratch.systems.MaturitySystems;
+import trs.scratch.systems.TpRequestSystems;
 
 import javax.annotation.Nonnull;
 

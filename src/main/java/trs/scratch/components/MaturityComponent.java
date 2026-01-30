@@ -1,4 +1,4 @@
-package trs.plugin.components;
+package trs.scratch.components;
 
 import com.hypixel.hytale.codec.KeyedCodec;
 import com.hypixel.hytale.codec.builder.BuilderCodec;
@@ -7,8 +7,8 @@ import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.hypixel.hytale.server.npc.NPCPlugin;
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
-import trs.plugin.MainPlugin;
-import trs.plugin.assets.MaturityAsset;
+import trs.scratch.MainPlugin;
+import trs.scratch.assets.MaturityAsset;
 
 public class MaturityComponent implements Component<EntityStore> {
 	private Float age = 0f;

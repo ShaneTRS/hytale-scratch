@@ -1,4 +1,4 @@
-package trs.plugin.commands;
+package trs.scratch.commands;
 
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;

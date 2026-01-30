@@ -1,4 +1,4 @@
-package trs.plugin.commands;
+package trs.scratch.commands;
 
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
@@ -14,7 +14,7 @@ import com.hypixel.hytale.server.npc.NPCPlugin;
 import com.hypixel.hytale.server.npc.entities.NPCEntity;
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
-import trs.plugin.components.MaturityComponent;
+import trs.scratch.components.MaturityComponent;
 
 import javax.annotation.Nonnull;
 

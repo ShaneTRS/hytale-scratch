@@ -1,4 +1,4 @@
-package trs.plugin.systems;
+package trs.scratch.systems;
 
 import com.hypixel.hytale.component.*;
 import com.hypixel.hytale.component.query.Query;
@@ -10,8 +10,8 @@ import com.hypixel.hytale.server.npc.entities.NPCEntity;
 import com.hypixel.hytale.server.npc.systems.RoleChangeSystem;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 import org.checkerframework.checker.nullness.compatqual.NullableDecl;
-import trs.plugin.assets.MaturityAsset;
-import trs.plugin.components.MaturityComponent;
+import trs.scratch.assets.MaturityAsset;
+import trs.scratch.components.MaturityComponent;
 
 import static com.hypixel.hytale.math.vector.Vector3d.formatShortString;
 

@@ -1,4 +1,4 @@
-package trs.plugin.assets;
+package trs.scratch.assets;
 
 import com.hypixel.hytale.assetstore.AssetExtraInfo;
 import com.hypixel.hytale.assetstore.AssetRegistry;
