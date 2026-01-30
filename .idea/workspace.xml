@@ -5,17 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="31aa396d-d7a6-4062-b183-7eed7a34764c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/systems/TpRequestSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/MainPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/MainPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/MaturityCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/MaturityCommand.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/PingCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/PingCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/HealCommand.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/TestCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/TestCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/TpRequestCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/TpRequestCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/components/MaturityComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/components/MaturityComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/components/TpRequestComponent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/components/TpRequestComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/systems/MaturitySystems.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/systems/MaturitySystems.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/systems/TpRequestSystems.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/TrsCollection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/commands/TrsCollection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/trs/plugin/systems/TpRequestSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/trs/plugin/systems/TpRequestSystems.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

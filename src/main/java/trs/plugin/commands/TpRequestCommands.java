@@ -92,7 +92,6 @@ public class TpRequestCommands {
 				acceptRequest(store, targetRef.getReference(), targetRef, playerRef);
 			});
 		}
-		
 	}
 	
 	public static class TpAcceptSpecificCommand extends AbstractPlayerCommand {

@@ -12,13 +12,14 @@ import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 import trs.plugin.components.TpRequestComponent;
 
-	public class TpRequestSystem extends EntityTickingSystem<EntityStore> {
-		private static final ComponentType<EntityStore, TpRequestComponent> TP_REQUEST_COMPONENT = TpRequestComponent.getComponentType();
-		private static final ComponentType<EntityStore, TransformComponent> TRANSFORM_COMPONENT = TransformComponent.getComponentType();
-		private static final ComponentType<EntityStore, Velocity> VELOCITY_COMPONENT = Velocity.getComponentType();
-		private static final ComponentType<EntityStore, Teleport> TELEPORT_COMPONENT = Teleport.getComponentType();
-		private static final ComponentType<EntityStore, PlayerRef> PLAYER_REF_COMPONENT = PlayerRef.getComponentType();
-		
+public class TpRequestSystems {
+	private static final ComponentType<EntityStore, TpRequestComponent> TP_REQUEST_COMPONENT = TpRequestComponent.getComponentType();
+	private static final ComponentType<EntityStore, TransformComponent> TRANSFORM_COMPONENT = TransformComponent.getComponentType();
+	private static final ComponentType<EntityStore, Velocity> VELOCITY_COMPONENT = Velocity.getComponentType();
+	private static final ComponentType<EntityStore, Teleport> TELEPORT_COMPONENT = Teleport.getComponentType();
+	private static final ComponentType<EntityStore, PlayerRef> PLAYER_REF_COMPONENT = PlayerRef.getComponentType();
+	
+	public static class TpRequestTicking extends EntityTickingSystem<EntityStore> {
 		@Override
 		public void tick(
 			float dt,
@@ -64,3 +65,4 @@ import trs.plugin.components.TpRequestComponent;
 		@Override
 		public Query<EntityStore> getQuery() { return Query.and(TP_REQUEST_COMPONENT, VELOCITY_COMPONENT, PLAYER_REF_COMPONENT); }
 	}
+}

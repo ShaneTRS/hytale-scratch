@@ -11,13 +11,10 @@ import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import it.unimi.dsi.fastutil.objects.ObjectList;
 import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
-import trs.plugin.components.TpRequestComponent;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayDeque;
 
 public class TestCommand extends AbstractTargetEntityCommand {
-	
 	private final RequiredArg<Integer> targetArg;
 	
 	public TestCommand(@Nonnull String name, @Nonnull String description, boolean requiresConfirmation) {
@@ -32,7 +29,6 @@ public class TestCommand extends AbstractTargetEntityCommand {
 		@NonNullDecl World world,
 		@NonNullDecl Store<EntityStore> store
 	) {
-		
 		switch (this.targetArg.get(commandContext)) {
 			case 0: {
 				commandContext.sendMessage(Message.raw("0"));
@@ -44,5 +40,4 @@ public class TestCommand extends AbstractTargetEntityCommand {
 			}
 		}
 	}
-	
 }
