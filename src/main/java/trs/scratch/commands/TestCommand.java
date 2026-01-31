@@ -15,12 +15,12 @@ import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 import javax.annotation.Nonnull;
 
 public class TestCommand extends AbstractTargetEntityCommand {
-	private final RequiredArg<Integer> targetArg;
-	
 	public TestCommand(@Nonnull String name, @Nonnull String description, boolean requiresConfirmation) {
 		super(name, description, requiresConfirmation);
 		this.targetArg = withRequiredArg("id", "Test ID", ArgTypes.INTEGER);
 	}
+	
+	private final RequiredArg<Integer> targetArg;
 	
 	@Override
 	protected void execute(

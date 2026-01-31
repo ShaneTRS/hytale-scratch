@@ -19,18 +19,18 @@ import java.awt.*;
 import java.util.UUID;
 
 public class TpRequestCommands {
-	private static final ComponentType<EntityStore, TpRequestComponent> TP_REQUEST_COMPONENT = TpRequestComponent.getComponentType();
 	private static final ComponentType<EntityStore, PlayerRef> PLAYER_REF_COMPONENT = PlayerRef.getComponentType();
+	private static final ComponentType<EntityStore, TpRequestComponent> TP_REQUEST_COMPONENT = TpRequestComponent.getComponentType();
 	
 	private static String ACCEPT_COMMAND = "tpaccept";
 	
 	public static class TpRequestCommand extends AbstractPlayerCommand {
-		private final RequiredArg<UUID> target;
-		
 		public TpRequestCommand(@Nonnull String name, @Nonnull String description, boolean requiresConfirmation) {
 			super(name, description, requiresConfirmation);
 			this.target = withRequiredArg("target", "Player you wish to teleport to", ArgTypes.PLAYER_UUID);
 		}
+		
+		private final RequiredArg<UUID> target;
 		
 		@Override
 		protected void execute(
@@ -40,14 +40,12 @@ public class TpRequestCommands {
 			@Nonnull PlayerRef playerRef,
 			@Nonnull World world
 		) {
-			store.removeComponentIfExists(ref, TP_REQUEST_COMPONENT);
-			
 			UUID targetUUID = commandContext.get(target);
 			PlayerRef targetRef = store.getComponent(world.getEntityRef(targetUUID), PLAYER_REF_COMPONENT);
 			
 			TpRequestComponent tpRequestComp = new TpRequestComponent();
 			tpRequestComp.setTarget(targetUUID);
-			store.addComponent(ref, TP_REQUEST_COMPONENT, tpRequestComp);
+			store.putComponent(ref, TP_REQUEST_COMPONENT, tpRequestComp);
 			
 			String playerUsername = playerRef.getUsername();
 			Message playerReassure = Message.raw("You sent a teleport request to ")
@@ -77,7 +75,6 @@ public class TpRequestCommands {
 			ACCEPT_COMMAND = name;
 		}
 		public TpAcceptAllCommand(@Nonnull String description) { super(description); }
-		
 		public TpAcceptAllCommand(@Nonnull String name, @Nonnull String description, boolean requiresConfirmation, @Nonnull String variantDescription) {
 			super(name, description, requiresConfirmation);
 			this.addUsageVariant(new TpAcceptSpecificCommand(variantDescription));
@@ -99,8 +96,6 @@ public class TpRequestCommands {
 	}
 	
 	public static class TpAcceptSpecificCommand extends AbstractPlayerCommand {
-		private final RequiredArg<UUID> target;
-		
 		public TpAcceptSpecificCommand(@Nonnull String name, @Nonnull String description, boolean requiresConfirmation) {
 			super(name, description, requiresConfirmation);
 			this.target = withRequiredArg("target", "Player you wish to accept", ArgTypes.PLAYER_UUID);
@@ -110,6 +105,8 @@ public class TpRequestCommands {
 			super(description);
 			this.target = withRequiredArg("target", "Player you wish to accept", ArgTypes.PLAYER_UUID);
 		}
+		
+		private final RequiredArg<UUID> target;
 		
 		@Override
 		protected void execute(

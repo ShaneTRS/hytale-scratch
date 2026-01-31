@@ -1,5 +1,6 @@
 package trs.scratch.commands;
 
+import com.hypixel.hytale.component.ComponentType;
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
 import com.hypixel.hytale.server.core.Message;
@@ -18,10 +19,10 @@ import trs.scratch.components.MaturityComponent;
 
 import javax.annotation.Nonnull;
 
+
 public class MaturityCommand extends AbstractTargetEntityCommand {
-	private final OptionalArg<Float> seconds;
-	private final OptionalArg<String> role;
-	private final FlagArg create;
+	private static final ComponentType<EntityStore, MaturityComponent> MATURITY_COMPONENT = MaturityComponent.getComponentType();
+	private static final ComponentType<EntityStore, NPCEntity> NPC_ENTITY_COMPONENT = NPCEntity.getComponentType();
 	
 	public MaturityCommand(@Nonnull String name, @Nonnull String description, boolean requiresConfirmation) {
 		super(name, description, requiresConfirmation);
@@ -29,6 +30,10 @@ public class MaturityCommand extends AbstractTargetEntityCommand {
 		this.role = withOptionalArg("role", "Role requested when mature", ArgTypes.STRING);
 		this.create = withFlagArg("create", "Create component if missing");
 	}
+	
+	private final OptionalArg<Float> seconds;
+	private final OptionalArg<String> role;
+	private final FlagArg create;
 	
 	@Override
 	protected void execute(
@@ -38,13 +43,13 @@ public class MaturityCommand extends AbstractTargetEntityCommand {
 		@NonNullDecl Store<EntityStore> store
 	) {
 		for (Ref<EntityStore> ref : objectList) {
-			NPCEntity npcComp = store.getComponent(ref, NPCEntity.getComponentType());
+			NPCEntity npcComp = store.getComponent(ref, NPC_ENTITY_COMPONENT);
 			if (npcComp == null) continue;
 			
-			MaturityComponent maturityComp = store.getComponent(ref, MaturityComponent.getComponentType());
+			MaturityComponent maturityComp = store.getComponent(ref, MATURITY_COMPONENT);
 			if (commandContext.get(create) && maturityComp == null) {
 				maturityComp = new MaturityComponent();
-				maturityComp.setCreatureAdultRoleId(npcComp.getRoleIndex());
+				maturityComp.setAdultRoleId(npcComp.getRoleIndex());
 				store.addComponent(ref, MaturityComponent.getComponentType(), maturityComp);
 			}
 			if (maturityComp == null) continue;

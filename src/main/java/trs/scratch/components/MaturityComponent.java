@@ -11,12 +11,14 @@ import trs.scratch.MainPlugin;
 import trs.scratch.assets.MaturityAsset;
 
 public class MaturityComponent implements Component<EntityStore> {
-	private Float age = 0f;
-	private Float childhood = 0f;
-	private int adultRole;
-	
 	public static final BuilderCodec<MaturityComponent> CODEC = BuilderCodec
 		.builder(MaturityComponent.class, MaturityComponent::new)
+		.append(
+			new KeyedCodec<>("AdultRole", BuilderCodec.INTEGER),
+			MaturityComponent::setAdultRoleId,
+			MaturityComponent::getAdultRole
+		)
+		.add()
 		.append(
 			new KeyedCodec<>("Age", BuilderCodec.FLOAT),
 			MaturityComponent::setAge,
@@ -29,29 +31,21 @@ public class MaturityComponent implements Component<EntityStore> {
 			MaturityComponent::getChildhood
 		)
 		.add()
-		.append(
-			new KeyedCodec<>("AdultRole", BuilderCodec.INTEGER),
-			MaturityComponent::setCreatureAdultRoleId,
-			MaturityComponent::getAdultRole
-		)
-		.add()
 		.build();
 	
-	public static ComponentType<EntityStore, MaturityComponent> getComponentType() {
-		return MainPlugin.get().getMaturityComponentType();
-	}
+	private int adultRole;
+	private Float age = 0f;
+	private Float childhood = 0f;
+	
+	public int getAdultRole() { return this.adultRole; }
+	public void setAdultRole(String roleName) { this.adultRole = NPCPlugin.get().getIndex(roleName); }
+	public void setAdultRoleId(int roleId) { this.adultRole = roleId; }
 	
 	public Float getAge() { return this.age; }
 	public void setAge(Float seconds) { this.age = seconds; }
 	
 	public Float getChildhood() { return this.childhood; }
 	public void setChildhood(Float seconds) { this.childhood = seconds; }
-	
-	public int getAdultRole() { return this.adultRole; }
-	public void setAdultRole(String roleName) {
-		this.adultRole = NPCPlugin.get().getIndex(roleName);
-	}
-	public void setCreatureAdultRoleId(int roleId) { this.adultRole = roleId; }
 	
 	public void incrementAge(Float seconds) { this.age += seconds; }
 	public boolean completedChildhood() { return this.age > this.childhood; }
@@ -67,9 +61,13 @@ public class MaturityComponent implements Component<EntityStore> {
 	@Override
 	public Component<EntityStore> clone() {
 		MaturityComponent cloned = new MaturityComponent();
+		cloned.adultRole = this.adultRole;
 		cloned.age = this.age;
 		cloned.childhood = this.childhood;
-		cloned.adultRole = this.adultRole;
 		return cloned;
+	}
+	
+	public static ComponentType<EntityStore, MaturityComponent> getComponentType() {
+		return MainPlugin.get().getMaturityComponentType();
 	}
 }

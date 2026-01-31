@@ -13,11 +13,11 @@ import org.checkerframework.checker.nullness.compatqual.NonNullDecl;
 import trs.scratch.components.TpRequestComponent;
 
 public class TpRequestSystems {
+	private static final ComponentType<EntityStore, PlayerRef> PLAYER_REF_COMPONENT = PlayerRef.getComponentType();
+	private static final ComponentType<EntityStore, Teleport> TELEPORT_COMPONENT = Teleport.getComponentType();
 	private static final ComponentType<EntityStore, TpRequestComponent> TP_REQUEST_COMPONENT = TpRequestComponent.getComponentType();
 	private static final ComponentType<EntityStore, TransformComponent> TRANSFORM_COMPONENT = TransformComponent.getComponentType();
 	private static final ComponentType<EntityStore, Velocity> VELOCITY_COMPONENT = Velocity.getComponentType();
-	private static final ComponentType<EntityStore, Teleport> TELEPORT_COMPONENT = Teleport.getComponentType();
-	private static final ComponentType<EntityStore, PlayerRef> PLAYER_REF_COMPONENT = PlayerRef.getComponentType();
 	
 	public static class TpRequestTicking extends EntityTickingSystem<EntityStore> {
 		@Override

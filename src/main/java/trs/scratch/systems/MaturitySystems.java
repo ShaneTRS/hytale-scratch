@@ -44,9 +44,7 @@ public class MaturitySystems {
 		}
 		
 		@Override
-		public Query<EntityStore> getQuery() {
-			return Query.and(MATURITY_COMPONENT, NPC_COMPONENT);
-		}
+		public Query<EntityStore> getQuery() { return Query.and(MATURITY_COMPONENT, NPC_COMPONENT); }
 	}
 	
 	public static class MaturityRef extends RefSystem<EntityStore> {
@@ -74,8 +72,6 @@ public class MaturitySystems {
 		
 		@NullableDecl
 		@Override
-		public Query<EntityStore> getQuery() {
-			return Query.and(NPC_COMPONENT, Query.not(MATURITY_COMPONENT));
-		}
+		public Query<EntityStore> getQuery() { return Query.and(NPC_COMPONENT, Query.not(MATURITY_COMPONENT)); }
 	}
 }

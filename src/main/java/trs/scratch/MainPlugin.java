@@ -21,15 +21,7 @@ import trs.scratch.systems.TpRequestSystems;
 import javax.annotation.Nonnull;
 
 public class MainPlugin extends JavaPlugin {
-	protected static MainPlugin instance;
-	private ComponentType<EntityStore, MaturityComponent> MATURITY_COMPONENT;
-	private ComponentType<EntityStore, TpRequestComponent> TP_REQUEST_COMPONENT;
-	
 	public MainPlugin(@Nonnull JavaPluginInit init) { super(init); }
-
-	public static MainPlugin get() { return instance; }	
-	public ComponentType<EntityStore, MaturityComponent> getMaturityComponentType() { return this.MATURITY_COMPONENT; }
-	public ComponentType<EntityStore, TpRequestComponent> getTpRequestComponentType() { return this.TP_REQUEST_COMPONENT; }
 	
 	@Override
 	protected void setup() {
@@ -61,4 +53,13 @@ public class MainPlugin extends JavaPlugin {
 			.build()
 		);
 	}
+	
+	private static MainPlugin instance;
+	private ComponentType<EntityStore, MaturityComponent> MATURITY_COMPONENT;
+	private ComponentType<EntityStore, TpRequestComponent> TP_REQUEST_COMPONENT;
+	
+	public ComponentType<EntityStore, MaturityComponent> getMaturityComponentType() { return this.MATURITY_COMPONENT; }
+	public ComponentType<EntityStore, TpRequestComponent> getTpRequestComponentType() { return this.TP_REQUEST_COMPONENT; }
+	
+	public static MainPlugin get() { return instance; }
 }
